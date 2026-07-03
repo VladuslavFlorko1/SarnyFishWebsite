@@ -1,0 +1,11 @@
+.header {
+    width: 100%;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    background-color: #b7b1bd;
+}
