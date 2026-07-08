@@ -1,11 +1,13 @@
 .header {
+    position: relative;
     width: 100%;
+    background-color: rgba(4, 31, 229, 0.3);
+    background: transparent;
+    z-index: 10;
 }
 
 .headerContainer {
     display: flex;
     justify-content: center;
-    max-width: 1280px;
     margin: 0 auto;
-    background-color: #b7b1bd;
 }

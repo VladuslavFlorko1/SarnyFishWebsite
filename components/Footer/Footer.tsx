@@ -13,8 +13,8 @@ const Footer = () => {
                 className={css.svgIcon}
                 src="/icons/home.svg"
                 alt="Home"
-                width={30}
-                height={30}
+                width={22}
+                height={22}
               />
             </Link>
           </li>
@@ -25,8 +25,8 @@ const Footer = () => {
                 className={css.svgIcon}
                 src="/icons/location.svg"
                 alt="Locations"
-                width={30}
-                height={30}
+                width={22}
+                height={22}
               />
             </Link>
           </li>
@@ -37,8 +37,8 @@ const Footer = () => {
                 className={css.svgIcon}
                 src="/icons/add.svg"
                 alt="Add location"
-                width={30}
-                height={30}
+                width={22}
+                height={22}
               />
             </Link>
           </li>
@@ -49,8 +49,8 @@ const Footer = () => {
                 className={css.svgIcon}
                 src="/icons/map.svg"
                 alt="Map"
-                width={30}
-                height={30}
+                width={22}
+                height={22}
               />
             </Link>
           </li>
@@ -61,8 +61,8 @@ const Footer = () => {
                 className={css.svgIcon}
                 src="/icons/profile.svg"
                 alt="Profile"
-                width={30}
-                height={30}
+                width={22}
+                height={22}
               />
             </Link>
           </li>

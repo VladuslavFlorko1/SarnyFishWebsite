@@ -10,8 +10,8 @@ const Header = () => {
           <Image
             src="/icons/logo.svg"
             alt="SarnyFish logo"
-            width={180}
-            height={90}
+            width={90}
+            height={60}
             priority
           />
         </Link>

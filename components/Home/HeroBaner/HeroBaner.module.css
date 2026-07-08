@@ -1,0 +1,45 @@
+.heroContainer {
+    position: absolute;
+    top: 0;
+
+    width: 100%;
+    padding: 60px 20px 20px;
+    background-image: url('/images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #fafafa;
+    margin-bottom: 40px;
+}
+
+.subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    color: #fafafa;
+
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.ctaButton {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    background-color: rgb(58, 52, 75);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}

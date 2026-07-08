@@ -1,5 +1,14 @@
-const Home = () => {
-  return <p>Welcome to Sarny Fish!</p>;
-}
+import HeroBaner from "@/components/Home/HeroBaner/HeroBaner";
+import HomeLocation from "@/components/Home/HomeLocation/HomeLocation";
 
-export default Home
+const Home = async () => {
+
+  return (
+    <>
+      <HeroBaner />
+      <HomeLocation />
+    </>
+  );
+};
+
+export default Home;
