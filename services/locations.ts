@@ -14,3 +14,17 @@ export const getLocations = async (
 
   return data.locations;
 };
+
+export const getPopularLocations = async (
+  perPage = 5
+): Promise<Location[]> => {
+  const { data } = await api.get("/locations", {
+    params: {
+      page: 1,
+      perPage,
+      sort: "popular",
+    },
+  });
+
+  return data.locations;
+};

@@ -1,9 +1,5 @@
 .header {
-    position: relative;
-    width: 100%;
-    background-color: rgba(4, 31, 229, 0.3);
-    background: transparent;
-    z-index: 10;
+    background: linear-gradient(135deg, #17b3d9, #2b396a);
 }
 
 .headerContainer {

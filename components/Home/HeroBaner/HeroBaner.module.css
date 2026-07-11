@@ -1,45 +1,113 @@
 .heroContainer {
-    position: absolute;
-    top: 0;
-
+    position: relative;
     width: 100%;
-    padding: 60px 20px 20px;
+    min-height: 480px;
+    padding: 60px 20px 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
     background-image: url('/images/hero.jpg');
     background-size: cover;
     background-position: center;
 }
 
+.heroContainer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(6, 26, 35, 0.15) 0%,
+            rgba(6, 26, 35, 0.55) 60%,
+            rgba(6, 26, 35, 0.85) 100%);
+    z-index: 0;
+}
+
 .title {
-    font-size: 48px;
-    font-weight: 700;
+    position: relative;
+    z-index: 1;
+
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     color: #fafafa;
-    margin-bottom: 40px;
+    margin-bottom: 16px;
+    max-width: 640px;
 }
 
 .subtitle {
-    font-size: 14px;
+    position: relative;
+    z-index: 1;
+
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.6;
-    letter-spacing: 0.02em;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    padding: 10px;
-    color: #fafafa;
+    letter-spacing: 0.01em;
+    color: #d7ecf3;
+    max-width: 520px;
+    margin-bottom: 32px;
 
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 .ctaButton {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 12px 24px;
+    margin-top: 0;
+    margin-right: 12px;
+
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
     color: #fff;
-    background-color: rgb(58, 52, 75);
+
+    background: linear-gradient(135deg, #17b3d9, #0a4a5f);
     border: none;
     border-radius: 30px;
+
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-right: 10px;
+    box-shadow: 0 4px 14px rgba(15, 110, 140, 0.4);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(15, 110, 140, 0.5);
+}
+
+.ctaButtonSecondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    position: relative;
+    z-index: 1;
+
+    padding: 12px 24px;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 30px;
+    backdrop-filter: blur(4px);
+
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.ctaButtonSecondary:hover {
+    background: rgba(255, 255, 255, 0.16);
 }

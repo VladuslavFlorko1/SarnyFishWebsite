@@ -5,13 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Location } from "@/types/location";
-import css from "./HomeLocations.module.css";
+import css from "../HomeLocation/HomeLocations.module.css";
 
 interface Props {
   locations: Location[];
 }
 
-export default function HomeLocationsCarousel({ locations }: Props) {
+const HomePopular = ({ locations }: Props) => {
   const [emblaRef] = useEmblaCarousel({
     align: "start",
     dragFree: true,
@@ -20,10 +20,10 @@ export default function HomeLocationsCarousel({ locations }: Props) {
   return (
     <section className={css.section}>
       <div className={css.header}>
-        <h2 className={css.title}>Останні улови</h2>
+        <h2 className={css.title}>Популярні локації</h2>
 
         <Link href="/locations" className={css.link}>
-          Переглянути локації
+          Переглянути всі
         </Link>
       </div>
 
@@ -64,6 +64,7 @@ export default function HomeLocationsCarousel({ locations }: Props) {
                     </div>
                   </div>
                 </div>
+
                 <div className={css.content}>
                   <h3 className={css.locationName}>{location.name}</h3>
 
@@ -85,4 +86,6 @@ export default function HomeLocationsCarousel({ locations }: Props) {
       </div>
     </section>
   );
-}
+};
+
+export default HomePopular;
