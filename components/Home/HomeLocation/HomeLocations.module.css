@@ -1,6 +1,6 @@
 .section {
     padding: 32px 16px;
-    background: linear-gradient(180deg, #bfaedb 0%, #ffffff 100%);
+    background: linear-gradient(180deg, #bfaedb 0%, #fbf1f1 100%);
 }
 
 .header {
@@ -182,6 +182,6 @@
 }
 
 .detailsButton:hover {
-    background: linear-gradient(135deg, #1ecbf5, #0d5a72);
+    background: linear-gradient(135deg, #1fa46a, #0d5a72);
     transform: scale(1.05);
 }

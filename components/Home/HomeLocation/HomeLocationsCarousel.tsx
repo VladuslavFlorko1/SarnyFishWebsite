@@ -23,7 +23,7 @@ export default function HomeLocationsCarousel({ locations }: Props) {
         <h2 className={css.title}>Останні улови</h2>
 
         <Link href="/locations" className={css.link}>
-          Переглянути локації
+          Переглянути всі
         </Link>
       </div>
 

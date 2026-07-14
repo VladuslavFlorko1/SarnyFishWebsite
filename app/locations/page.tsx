@@ -1,5 +1,5 @@
-const locations = () => {
-  return <p>Locations page</p>
-}
+import LocationsFeed from "@/components/Locations/LocationsFeed";
 
-export default locations
+export default function LocationsPage() {
+  return <LocationsFeed />;
+}

@@ -1,5 +1,5 @@
 import { api } from "@/lib/api";
-import { Location } from "@/types/location";
+import { Location, LocationsResponse } from "@/types/location";
 
 export const getLocations = async (
   perPage = 10
@@ -27,4 +27,26 @@ export const getPopularLocations = async (
   });
 
   return data.locations;
+};
+
+
+export const getLocationsFeed = async (
+  page: number,
+  perPage = 10
+): Promise<LocationsResponse> => {
+  const { data } = await api.get("/locations", {
+    params: {
+      page,
+      perPage,
+      sort: "newest",
+    },
+  });
+
+  return data;
+};
+
+export const toggleLike = async (id: string) => {
+  const { data } = await api.patch(`/locations/${id}/like`);
+
+  return data;
 };

@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import Providers from "@/components/Providers/Providers";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -34,9 +35,11 @@ export default function RootLayout({
       className={`${inter.variable} ${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header />
+        <Providers>
+          <Header />
           {children}
-        <Footer />
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
