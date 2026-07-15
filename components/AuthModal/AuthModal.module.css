@@ -1,0 +1,77 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 46, 61, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+}
+
+.modal {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    background: rgba(10, 74, 95, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(23, 179, 217, 0.3);
+    border-radius: 20px;
+    padding: 60px 20px 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e8f7de;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    background: rgba(15, 46, 61, 0.6);
+    border-radius: 999px;
+    padding: 4px;
+}
+
+.tab {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: #a9d8e6;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tabActive {
+    background: linear-gradient(135deg, #17b3d9, #0a4a5f);
+    color: #fff;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}

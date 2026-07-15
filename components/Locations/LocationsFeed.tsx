@@ -7,6 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
+import toast from "react-hot-toast";
 
 import { getLocationsFeed, toggleLike } from "@/services/locations";
 
@@ -39,10 +40,53 @@ export default function LocationsFeed() {
   const likeMutation = useMutation({
     mutationFn: toggleLike,
 
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["locations"],
+    onMutate: async (locationId: string) => {
+      await queryClient.cancelQueries({ queryKey: ["locations"] });
+
+      const previousData = queryClient.getQueryData(["locations"]);
+
+      queryClient.setQueryData(["locations"], (old: any) => {
+        if (!old) return old;
+
+        return {
+          ...old,
+          pages: old.pages.map((page: any) => ({
+            ...page,
+            locations: page.locations.map((location: any) =>
+              location._id === locationId
+                ? {
+                    ...location,
+                    isLiked: !location.isLiked,
+                    likes: {
+                      ...location.likes,
+                      count: location.isLiked
+                        ? location.likes.count - 1
+                        : location.likes.count + 1,
+                    },
+                  }
+                : location,
+            ),
+          })),
+        };
       });
+
+      return { previousData };
+    },
+
+    onError: (error: any, _locationId, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(["locations"], context.previousData);
+      }
+
+      if (error?.response?.status === 401) {
+        toast.error("Щоб поставити лайк, ввійдіть у свій акаунт");
+      } else {
+        toast.error("Не вдалося поставити лайк. Спробуйте ще раз");
+      }
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["locations"] });
     },
   });
 
@@ -96,10 +140,10 @@ export default function LocationsFeed() {
                   className={css.image}
                 />
 
-                <div className={css.actions}>
+                <div className={css.imageOverlay}>
                   <button
                     type="button"
-                    className={css.action}
+                    className={css.infoItem}
                     onClick={() => likeMutation.mutate(location._id)}
                   >
                     <Image
@@ -111,23 +155,22 @@ export default function LocationsFeed() {
                       alt="Likes"
                       width={22}
                       height={22}
-                      onClick={() => likeMutation.mutate(location._id)}
-                      style={{ cursor: "pointer" }}
                     />
-
-                    <span>{location.likes.count}</span>
+                    <span className={css.count}>{location.likes.count}</span>
                   </button>
 
-                  <div className={css.action}>
+                  <Link
+                    href={`/locations/${location._id}#comments`}
+                    className={css.infoItem}
+                  >
                     <Image
                       src="/icons/comments.svg"
                       alt="Comments"
                       width={22}
                       height={22}
                     />
-
-                    <span>{location.commentsCount}</span>
-                  </div>
+                    <span className={css.count}>{location.commentsCount}</span>
+                  </Link>
                 </div>
               </div>
 

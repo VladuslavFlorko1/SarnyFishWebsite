@@ -104,7 +104,7 @@
     object-fit: cover;
 }
 
-.actions {
+.imageOverlay {
     position: absolute;
     right: 12px;
     bottom: 60px;
@@ -217,4 +217,30 @@
 
 .button:active {
     transform: scale(0.96);
+}
+.infoItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    min-width: 42px;
+    padding: 6px 8px;
+
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+    border-radius: 14px;
+
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.count {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
 }

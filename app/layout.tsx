@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
@@ -36,6 +37,33 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Providers>
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: "rgba(10, 74, 95, 0.95)",
+                color: "#e8f7de",
+                border: "1px solid rgba(23, 179, 217, 0.3)",
+                borderRadius: "12px",
+                padding: "12px 16px",
+                fontSize: "14px",
+                backdropFilter: "blur(12px)",
+              },
+              success: {
+                iconTheme: {
+                  primary: "#a8e063",
+                  secondary: "#0f2e3d",
+                },
+              },
+              error: {
+                iconTheme: {
+                  primary: "#ff8a8a",
+                  secondary: "#0f2e3d",
+                },
+              },
+            }}
+          />
           <Header />
           {children}
           <Footer />

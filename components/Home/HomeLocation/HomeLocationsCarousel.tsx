@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 
+import { toggleLike } from "@/services/locations";
 import { Location } from "@/types/location";
 import css from "./HomeLocations.module.css";
 
@@ -17,6 +20,34 @@ export default function HomeLocationsCarousel({ locations }: Props) {
     dragFree: true,
   });
 
+
+  const [items, setItems] = useState(locations);
+
+  const likeMutation = useMutation({
+    mutationFn: toggleLike,
+  });
+
+  const handleLike = (locationId: string) => {
+    setItems((prev) =>
+      prev.map((location) =>
+        location._id === locationId
+          ? {
+              ...location,
+              isLiked: !location.isLiked,
+              likes: {
+                ...location.likes,
+                count: location.isLiked
+                  ? location.likes.count - 1
+                  : location.likes.count + 1,
+              },
+            }
+          : location,
+      ),
+    );
+
+    likeMutation.mutate(locationId);
+  };
+
   return (
     <section className={css.section}>
       <div className={css.header}>
@@ -29,7 +60,7 @@ export default function HomeLocationsCarousel({ locations }: Props) {
 
       <div className={css.embla} ref={emblaRef}>
         <div className={css.emblaContainer}>
-          {locations.map((location) => (
+          {items.map((location) => (
             <div className={css.emblaSlide} key={location._id}>
               <div className={css.card}>
                 <div className={css.imageWrapper}>
@@ -41,17 +72,35 @@ export default function HomeLocationsCarousel({ locations }: Props) {
                   />
 
                   <div className={css.imageOverlay}>
-                    <div className={css.infoItem}>
+                    <button
+                      type="button"
+                      className={css.infoItem}
+                      onClick={() => handleLike(location._id)}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        padding: 0,
+                        cursor: "pointer",
+                      }}
+                    >
                       <Image
-                        src="/icons/heart-white.svg"
+                        src={
+                          location.isLiked
+                            ? "/icons/heart-red.svg"
+                            : "/icons/heart-white.svg"
+                        }
                         alt="Likes"
                         width={24}
                         height={24}
                       />
                       <span className={css.count}>{location.likes.count}</span>
-                    </div>
+                    </button>
 
-                    <div className={css.infoItem}>
+                    <Link
+                      href={`/locations/${location._id}#comments`}
+                      className={css.infoItem}
+                      style={{ textDecoration: "none" }}
+                    >
                       <Image
                         src="/icons/comments.svg"
                         alt="Comments"
@@ -61,7 +110,7 @@ export default function HomeLocationsCarousel({ locations }: Props) {
                       <span className={css.count}>
                         {location.commentsCount}
                       </span>
-                    </div>
+                    </Link>
                   </div>
                 </div>
                 <div className={css.content}>
