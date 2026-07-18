@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "../LoginForm/LoginForm.module.css";
 import toast from "react-hot-toast";
+import { api } from "@/lib/api";
 
 interface RegisterFormProps {
   onSuccess: () => void;
@@ -38,8 +39,8 @@ export default function RegisterForm({
     }
     if (!password) {
       newErrors.password = "Вкажіть пароль";
-    } else if (password.length < 6) {
-      newErrors.password = "Мінімум 6 символів";
+    } else if (password.length < 8) {
+      newErrors.password = "Мінімум 8 символів";
     }
     if (confirmPassword !== password) {
       newErrors.confirmPassword = "Паролі не збігаються";
@@ -56,32 +57,17 @@ export default function RegisterForm({
     setErrors({});
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, email, password }),
-        },
-      );
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(
-          data?.validation?.body?.message ||
-            data?.message ||
-            "Не вдалося зареєструватися",
-        );
-      }
+      await api.post("/auth/register", { username, email, password });
 
       toast.success("Реєстрація успішна! Ласкаво просимо 🎣");
       onSuccess();
-
-      onSuccess();
-    } catch (err) {
-      setErrors({
-        general: err instanceof Error ? err.message : "Щось пішло не так",
-      });
+    } catch (err: any) {
+      const message =
+        err?.response?.data?.validation?.body?.message ||
+        err?.response?.data?.message ||
+        "Не вдалося зареєструватися";
+      setErrors({ general: message });
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
@@ -100,7 +86,7 @@ export default function RegisterForm({
           className={styles.input}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Ваше ім'я"
+          placeholder="Влад Флорко"
         />
         {errors.username && (
           <span className={styles.error}>{errors.username}</span>

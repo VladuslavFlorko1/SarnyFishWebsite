@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "./LoginForm.module.css";
 import toast from "react-hot-toast";
+import { api } from "@/lib/api";
 
 interface LoginFormProps {
   onSuccess: () => void;
@@ -48,26 +49,15 @@ export default function LoginForm({
     setErrors({});
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, password }),
-        },
-      );
+      await api.post("/auth/login", { email, password });
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.message || "Невірний email або пароль");
-      }
-      
       toast.success("Вітаємо! Ви успішно увійшли");
       onSuccess();
-    } catch (err) {
-      setErrors({
-        general: err instanceof Error ? err.message : "Щось пішло не так",
-      });
+    } catch (err: any) {
+      const message =
+        err?.response?.data?.message || "Невірний email або пароль";
+      setErrors({ general: message });
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
