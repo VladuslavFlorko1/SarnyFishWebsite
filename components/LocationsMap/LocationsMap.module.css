@@ -1,0 +1,78 @@
+.mapWrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.map {
+    height: calc(100vh - 220px);
+    min-height: 400px;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 160px;
+}
+
+.popupImageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.popupImage {
+    object-fit: cover;
+}
+
+.popup .popupName {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f2e3d;
+    margin: 0;
+}
+
+.popup .popupCity {
+    font-size: 12px;
+    color: #5a7a85;
+    margin: 0;
+}
+
+.popupFish {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    
+}
+
+.popupTag {
+    background: #e1f5ee;
+    color: #25444e;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 999px;
+}
+
+.popupLink {
+    background: linear-gradient(135deg, #17b3d9, #3f9ebd);
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 999px;
+    margin-top: 4px;
+}
+
+:global(.leaflet-container) {
+    overflow: hidden !important;
+    max-width: 100% !important;
+}
+
+:global(.leaflet-popup-content-wrapper) {
+    border-radius: 12px;
+}

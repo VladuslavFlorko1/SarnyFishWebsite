@@ -58,3 +58,26 @@ export const createLocation = async (payload: CreateLocationPayload) => {
 
   return data;
 };
+
+
+export interface LocationsMapFilters {
+  city?: string;
+  type?: string;
+  fish?: string;
+}
+
+export const getLocationsMap = async (
+  filters: LocationsMapFilters
+): Promise<Location[]> => {
+  const { data } = await api.get("/locations", {
+    params: {
+      page: 1,
+      perPage: 100,
+      ...(filters.city ? { city: filters.city } : {}),
+      ...(filters.type ? { type: filters.type } : {}),
+      ...(filters.fish ? { fish: filters.fish } : {}),
+    },
+  });
+
+  return data.locations;
+};

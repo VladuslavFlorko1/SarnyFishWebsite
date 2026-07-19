@@ -1,0 +1,100 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 16px 60px;
+    background: linear-gradient(60deg, #0a4a5f, #17b3d9);
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f2e3d;
+    margin: 0;
+}
+
+.filtersCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: linear-gradient(60deg, #cdeef7, #0a4a5f);
+    border: 2px solid #7fc8dd;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.cityInput {
+    width: 100%;
+    min-width: 0;
+    background: #fff;
+    border: 2px solid #bfe9f2;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: #0f2e3d;
+    font-size: 15px;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+}
+
+.cityInput:focus {
+    border-color: #17b3d9;
+}
+
+.cityInput::placeholder {
+    color: #6fa8b8;
+}
+
+.filterLabel {
+    font-size: 12px;
+    color: #0f2e3d;
+    font-weight: 600;
+    margin: 4px 0 0;
+}
+
+.chipRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.chip {
+    background: linear-gradient(135deg, #a2ddf2, #7fc8dd);
+    border: 2px solid #0a4a5f;
+    color: #0f2e3d;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chipActive {
+    background: linear-gradient(135deg, #17b3d9, #0a4a5f);
+    border-color: #a8e063;
+    color: #fff;
+}
+
+.clearButton {
+    align-self: center;
+    background: #ffe3e3;
+    border: 2px solid #f3b7b7;
+    color: #b83e3e;
+    border-radius: 999px;
+    padding: 8px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background 0.2s ease;
+}
+
+.clearButton:hover {
+    background: #ffd6d6;
+}
+
+.resultsCount {
+    font-size: 13px;
+    color: #0a4a5f;
+    margin: 0;
+}
