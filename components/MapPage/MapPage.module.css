@@ -4,6 +4,7 @@
     gap: 16px;
     padding: 24px 16px 60px;
     background: linear-gradient(60deg, #0a4a5f, #17b3d9);
+    min-height: 100vh;
 }
 
 .title {
@@ -97,4 +98,54 @@
     font-size: 13px;
     color: #0a4a5f;
     margin: 0;
+}
+.accordionSection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.accordionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+.arrow {
+    color: #0a4a5f;
+    font-size: 14px;
+    transition: transform 0.2s ease;
+}
+
+.arrowOpen {
+    transform: rotate(180deg);
+}
+
+.activeDot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #17b3d9;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+.collapse {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+}
+
+.collapseOpen {
+    grid-template-rows: 1fr;
+}
+
+.collapseInner {
+    overflow: hidden;
+    min-height: 0;
 }

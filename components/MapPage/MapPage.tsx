@@ -44,6 +44,9 @@ export default function MapPage() {
   const [city, setCity] = useState("");
   const [cityInput, setCityInput] = useState("");
 
+  const [typeOpen, setTypeOpen] = useState(false);
+  const [fishOpen, setFishOpen] = useState(false);
+
   const { data: locations = [], isLoading } = useQuery({
     queryKey: ["locations-map", type, fish, city],
     queryFn: () => getLocationsMap({ type, fish, city }),
@@ -75,32 +78,78 @@ export default function MapPage() {
           placeholder="Пошук за містом..."
         />
 
-        <p className={styles.filterLabel}>Шукати за типом водойми</p>
-        <div className={styles.chipRow}>
-          {LOCATION_TYPES.map((t) => (
-            <button
-              key={t}
-              type="button"
-              className={`${styles.chip} ${type === t ? styles.chipActive : ""}`}
-              onClick={() => setType(type === t ? "" : t)}
+        <div className={styles.accordionSection}>
+          <button
+            type="button"
+            className={styles.accordionHeader}
+            onClick={() => setTypeOpen((prev) => !prev)}
+          >
+            <span className={styles.filterLabel}>
+              Шукати за типом водойми
+              {type && <span className={styles.activeDot} />}
+            </span>
+            <span
+              className={`${styles.arrow} ${typeOpen ? styles.arrowOpen : ""}`}
             >
-              {t}
-            </button>
-          ))}
+              ▾
+            </span>
+          </button>
+
+          <div
+            className={`${styles.collapse} ${typeOpen ? styles.collapseOpen : ""}`}
+          >
+            <div className={styles.collapseInner}>
+              <div className={styles.chipRow}>
+                {LOCATION_TYPES.map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    className={`${styles.chip} ${type === t ? styles.chipActive : ""}`}
+                    onClick={() => setType(type === t ? "" : t)}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
-        <p className={styles.filterLabel}>Шукати за видом риб</p>
-        <div className={styles.chipRow}>
-          {FISH_TYPES.map((f) => (
-            <button
-              key={f}
-              type="button"
-              className={`${styles.chip} ${fish === f ? styles.chipActive : ""}`}
-              onClick={() => setFish(fish === f ? "" : f)}
+        <div className={styles.accordionSection}>
+          <button
+            type="button"
+            className={styles.accordionHeader}
+            onClick={() => setFishOpen((prev) => !prev)}
+          >
+            <span className={styles.filterLabel}>
+              Шукати за видом риб
+              {fish && <span className={styles.activeDot} />}
+            </span>
+            <span
+              className={`${styles.arrow} ${fishOpen ? styles.arrowOpen : ""}`}
             >
-              {f}
-            </button>
-          ))}
+              ▾
+            </span>
+          </button>
+
+          <div
+            className={`${styles.collapse} ${fishOpen ? styles.collapseOpen : ""}`}
+          >
+            <div className={styles.collapseInner}>
+              <div className={styles.chipRow}>
+                {FISH_TYPES.map((f) => (
+                  <button
+                    key={f}
+                    type="button"
+                    className={`${styles.chip} ${fish === f ? styles.chipActive : ""}`}
+                    onClick={() => setFish(fish === f ? "" : f)}
+                  >
+                    {f}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         {hasActiveFilters ? (
