@@ -1,0 +1,259 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 16px 60px;
+    background: #0f2e3d;
+    min-height: 100vh;
+}
+
+.loading {
+    color: #a9d8e6;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatarWrapper {
+    position: relative;
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    cursor: pointer;
+    border: 2px solid #17b3d9;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatarOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 26, 34, 0.6);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.avatarWrapper:hover .avatarOverlay {
+    opacity: 1;
+}
+
+.hiddenInput {
+    display: none;
+}
+
+.statsRow {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+}
+
+.statItem,
+.statItemButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: none;
+    border: none;
+    cursor: default;
+}
+
+.statItemButton {
+    cursor: pointer;
+}
+
+.statNumber {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e8f7de;
+}
+
+.statLabel {
+    font-size: 12px;
+    color: #a9d8e6;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.username {
+    font-size: 15px;
+    font-weight: 700;
+    color: #e8f7de;
+    margin: 0;
+}
+
+.bio {
+    font-size: 13px;
+    color: #a9d8e6;
+    margin: 0;
+}
+
+.requestsPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(23, 179, 217, 0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(23, 179, 217, 0.25);
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.emptyText {
+    color: #a9d8e6;
+    font-size: 13px;
+    text-align: center;
+    margin: 0;
+}
+
+.requestRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.requestUser {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.requestAvatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.requestName {
+    font-size: 13px;
+    color: #e8f7de;
+}
+
+.requestActions {
+    display: flex;
+    gap: 6px;
+}
+
+.acceptButton {
+    background: linear-gradient(135deg, #17b3d9, #0a4a5f);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.rejectButton {
+    background: rgba(255, 90, 90, 0.15);
+    border: 1px solid rgba(255, 90, 90, 0.3);
+    color: #ffb3b3;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.authPrompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 100vh;
+    padding: 24px;
+    background: #0f2e3d;
+    text-align: center;
+}
+
+.authTitle {
+    color: #e8f7de;
+    font-size: 16px;
+    font-weight: 600;
+    max-width: 260px;
+}
+
+.authButton {
+    background: linear-gradient(135deg, #17b3d9, #0a4a5f);
+    color: #fff;
+    border-radius: 999px;
+    padding: 12px 32px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.divider {
+    height: 1px;
+    background: rgba(169, 216, 230, 0.15);
+    margin: 4px 0;
+}
+
+.locationsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.emptyLocations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 32px 16px;
+    text-align: center;
+}
+
+.emptyTitle {
+    color: #e8f7de;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.addLocationButton {
+    background: linear-gradient(135deg, #17b3d9, #0a4a5f);
+    color: #fff;
+    border-radius: 999px;
+    padding: 10px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+.locationsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+}
+
+.locationTile {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.locationImage {
+    object-fit: cover;
+}

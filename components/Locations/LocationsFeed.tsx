@@ -114,7 +114,7 @@ export default function LocationsFeed() {
             <li key={location._id} className={css.card}>
               <div className={css.author}>
                 <Link
-                  href={`/users/${location.owner._id}`}
+                  href={`/profile/${location.owner._id}`}
                   className={css.authorLink}
                 >
                   <Image

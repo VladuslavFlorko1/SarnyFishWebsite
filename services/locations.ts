@@ -81,3 +81,10 @@ export const getLocationsMap = async (
 
   return data.locations;
 };
+
+export const getUserLocations = async (userId: string): Promise<Location[]> => {
+  const { data } = await api.get("/locations", {
+    params: { owner: userId, perPage: 100 },
+  });
+  return data.locations;
+};
