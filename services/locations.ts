@@ -88,3 +88,12 @@ export const getUserLocations = async (userId: string): Promise<Location[]> => {
   });
   return data.locations;
 };
+export const getLocationById = async (id: string): Promise<Location> => {
+  const { data } = await api.get(`/locations/${id}`);
+  return data;
+};
+
+export const deleteLocation = async (id: string) => {
+  const { data } = await api.delete(`/locations/${id}`);
+  return data;
+};

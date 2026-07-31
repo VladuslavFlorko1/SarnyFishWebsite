@@ -142,3 +142,30 @@
 .locationImage {
     object-fit: cover;
 }
+.authPrompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 100vh;
+    padding: 24px;
+    background: #0f2e3d;
+    text-align: center;
+}
+
+.authTitle {
+    color: #e8f7de;
+    font-size: 16px;
+    font-weight: 600;
+    max-width: 260px;
+}
+
+.authButton {
+    background: linear-gradient(135deg, #17b3d9, #0a4a5f);
+    color: #fff;
+    border-radius: 999px;
+    padding: 12px 32px;
+    font-size: 14px;
+    font-weight: 600;
+}

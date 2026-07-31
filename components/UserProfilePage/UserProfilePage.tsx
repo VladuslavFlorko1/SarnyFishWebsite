@@ -22,10 +22,13 @@ interface UserProfilePageProps {
 export default function UserProfilePage({ userId }: UserProfilePageProps) {
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["user-profile", userId],
     queryFn: () => getUserById(userId),
+    retry: false,
   });
+
+  const isUnauthorized = isError && (error as any)?.response?.status === 401;
 
   const { data: userLocations = [], isLoading: locationsLoading } = useQuery({
     queryKey: ["user-locations", userId],
@@ -84,8 +87,21 @@ export default function UserProfilePage({ userId }: UserProfilePageProps) {
     onError: () => toast.error("Не вдалося видалити з друзів"),
   });
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return <div className={styles.loading}>Завантаження...</div>;
+  }
+
+  if (isUnauthorized || !data) {
+    return (
+      <div className={styles.authPrompt}>
+        <p className={styles.authTitle}>
+          Щоб переглядати профілі інших користувачів, увійдіть у свій акаунт
+        </p>
+        <Link href="/" className={styles.authButton}>
+          На головну
+        </Link>
+      </div>
+    );
   }
 
   const { user, relationStatus, requestId } = data;

@@ -5,18 +5,13 @@ import About from "@/components/Home/About/About";
 import Features from "@/components/Home/Features/Features";
 import Map from "@/components/Home/Map/Map";
 
-
-import { getPopularLocations } from "@/services/locations";
-
-const Home = async () => {
-  const popularLocations = await getPopularLocations();
-
+const Home = () => {
   return (
     <>
       <HeroBaner />
       <HomeLocation />
       <Features />
-      <HomePopular locations={popularLocations} />
+      <HomePopular />
       <Map />
       <About />
     </>
