@@ -97,3 +97,36 @@ export const deleteLocation = async (id: string) => {
   const { data } = await api.delete(`/locations/${id}`);
   return data;
 };
+
+export interface UpdateLocationPayload {
+  name?: string;
+  description?: string;
+  city?: string;
+  type?: string;
+  lat?: number;
+  lng?: number;
+  fish?: string[];
+  newImages?: File[];
+  removeImages?: string[];
+}
+
+export const updateLocation = async (
+  id: string,
+  payload: UpdateLocationPayload
+): Promise<Location> => {
+  const formData = new FormData();
+
+  if (payload.name !== undefined) formData.append("name", payload.name);
+  if (payload.description !== undefined) formData.append("description", payload.description);
+  if (payload.city !== undefined) formData.append("city", payload.city);
+  if (payload.type !== undefined) formData.append("type", payload.type);
+  if (payload.lat !== undefined) formData.append("lat", String(payload.lat));
+  if (payload.lng !== undefined) formData.append("lng", String(payload.lng));
+
+  payload.fish?.forEach((f) => formData.append("fish", f));
+  payload.removeImages?.forEach((url) => formData.append("removeImages", url));
+  payload.newImages?.forEach((file) => formData.append("images", file));
+
+  const { data } = await api.patch(`/locations/${id}`, formData);
+  return data;
+};
