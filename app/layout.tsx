@@ -20,9 +20,52 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "SarnyFish",
+  metadataBase: new URL("https://www.sarnyfish.com"),
+  title: "SarnyFish — риболовні локації Сарненського району",
   description:
-    "SarnyFish is a platform for anglers to discover fishing locations, share catches, and explore the best fishing spots.",
+    "Знаходь найкращі місця для риболовлі в Сарненському районі, ділись уловами, читай відгуки та спілкуйся з іншими рибалками. Інтерактивна карта водойм, лайки, коментарі та спільнота однодумців.",
+  keywords: [
+    "риболовля Сарни",
+    "риболовля Рівненська область",
+    "місця для риболовлі",
+    "карта водойм",
+    "рибальські локації",
+    "SarnyFish",
+    "рибалка Україна",
+  ],
+  authors: [{ name: "SarnyFish" }],
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+  },
+  openGraph: {
+    title: "SarnyFish — риболовні локації Сарненського району",
+    description:
+      "Знаходь найкращі місця для риболовлі, ділись уловами та спілкуйся з рибалками-однодумцями.",
+    url: "https://www.sarnyfish.com",
+    siteName: "SarnyFish",
+    locale: "uk_UA",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "SarnyFish — платформа для рибалок",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SarnyFish — риболовні локації Сарненського району",
+    description:
+      "Знаходь найкращі місця для риболовлі, ділись уловами та спілкуйся з рибалками-однодумцями.",
+    images: ["/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -32,7 +75,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="uk"
       className={`${inter.variable} ${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
