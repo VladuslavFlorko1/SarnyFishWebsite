@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "../LoginForm/LoginForm.module.css";
 import toast from "react-hot-toast";
 import { api } from "@/lib/api";
+import VerifyEmailModal from "@/components/VerifyEmailModal/VerifyEmailModal";
 
 interface RegisterFormProps {
   onSuccess: () => void;
@@ -28,6 +29,7 @@ export default function RegisterForm({
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [verifyModalOpen, setVerifyModalOpen] = useState(false);
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
@@ -59,8 +61,8 @@ export default function RegisterForm({
     try {
       await api.post("/auth/register", { username, email, password });
 
-      toast.success("Реєстрація успішна! Ласкаво просимо 🎣");
-      onSuccess();
+      toast.success("Реєстрація успішна! Перевір пошту 🎣");
+      setVerifyModalOpen(true);
     } catch (err: any) {
       const message =
         err?.response?.data?.validation?.body?.message ||
@@ -74,83 +76,95 @@ export default function RegisterForm({
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit} noValidate>
-      {errors.general && (
-        <p className={styles.generalError}>{errors.general}</p>
-      )}
-
-      <div className={styles.field}>
-        <label className={styles.label}>Ім&apos;я користувача</label>
-        <input
-          type="text"
-          className={styles.input}
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Влад Флорко"
-        />
-        {errors.username && (
-          <span className={styles.error}>{errors.username}</span>
+    <>
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        {errors.general && (
+          <p className={styles.generalError}>{errors.general}</p>
         )}
-      </div>
 
-      <div className={styles.field}>
-        <label className={styles.label}>Email</label>
-        <input
-          type="email"
-          className={styles.input}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
-        />
-        {errors.email && <span className={styles.error}>{errors.email}</span>}
-      </div>
+        <div className={styles.field}>
+          <label className={styles.label}>Ім&apos;я користувача</label>
+          <input
+            type="text"
+            className={styles.input}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Влад Флорко"
+          />
+          {errors.username && (
+            <span className={styles.error}>{errors.username}</span>
+          )}
+        </div>
 
-      <div className={styles.field}>
-        <label className={styles.label}>Пароль</label>
-        <input
-          type="password"
-          className={styles.input}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="••••••••"
-        />
-        {errors.password && (
-          <span className={styles.error}>{errors.password}</span>
-        )}
-      </div>
+        <div className={styles.field}>
+          <label className={styles.label}>Email</label>
+          <input
+            type="email"
+            className={styles.input}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+          />
+          {errors.email && <span className={styles.error}>{errors.email}</span>}
+        </div>
 
-      <div className={styles.field}>
-        <label className={styles.label}>Підтвердіть пароль</label>
-        <input
-          type="password"
-          className={styles.input}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="••••••••"
-        />
-        {errors.confirmPassword && (
-          <span className={styles.error}>{errors.confirmPassword}</span>
-        )}
-      </div>
+        <div className={styles.field}>
+          <label className={styles.label}>Пароль</label>
+          <input
+            type="password"
+            className={styles.input}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
+          />
+          {errors.password && (
+            <span className={styles.error}>{errors.password}</span>
+          )}
+        </div>
 
-      <button
-        type="submit"
-        className={styles.submitButton}
-        disabled={isLoading}
-      >
-        {isLoading ? "Реєстрація..." : "Зареєструватися"}
-      </button>
+        <div className={styles.field}>
+          <label className={styles.label}>Підтвердіть пароль</label>
+          <input
+            type="password"
+            className={styles.input}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="••••••••"
+          />
+          {errors.confirmPassword && (
+            <span className={styles.error}>{errors.confirmPassword}</span>
+          )}
+        </div>
 
-      <p className={styles.switchText}>
-        Вже маєте акаунт?{" "}
         <button
-          type="button"
-          className={styles.switchLink}
-          onClick={onSwitchToLogin}
+          type="submit"
+          className={styles.submitButton}
+          disabled={isLoading}
         >
-          Увійти
+          {isLoading ? "Реєстрація..." : "Зареєструватися"}
         </button>
-      </p>
-    </form>
+
+        <p className={styles.switchText}>
+          Вже маєте акаунт?{" "}
+          <button
+            type="button"
+            className={styles.switchLink}
+            onClick={onSwitchToLogin}
+          >
+            Увійти
+          </button>
+        </p>
+      </form>
+
+      <VerifyEmailModal
+        email={email}
+        isOpen={verifyModalOpen}
+        onClose={() => {
+          setVerifyModalOpen(false);
+          onSuccess();
+        }}
+        onVerified={onSuccess}
+      />
+    </>
   );
 }

@@ -1,0 +1,103 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 46, 61, 0.85);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    padding: 16px;
+}
+
+.modal {
+    width: 100%;
+    max-width: 360px;
+    background: rgba(10, 74, 95, 0.95);
+    border: 1px solid rgba(23, 179, 217, 0.3);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e8f7de;
+    margin: 0 0 8px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #a9d8e6;
+    margin: 0 0 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.codeInput {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(169, 216, 230, 0.3);
+    border-radius: 12px;
+    padding: 14px;
+    color: #e8f7de;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 8px;
+    outline: none;
+    font-family: inherit;
+}
+
+.codeInput:focus {
+    border-color: #17b3d9;
+}
+
+.codeInput::placeholder {
+    color: rgba(169, 216, 230, 0.3);
+    letter-spacing: 8px;
+}
+
+.submitButton {
+    background: linear-gradient(135deg, #17b3d9, #0a4a5f);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 13px 0;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.submitButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.resendButton {
+    background: none;
+    border: none;
+    color: #17b3d9;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 16px;
+}
+
+.resendButton:disabled {
+    color: #5a7a85;
+    cursor: not-allowed;
+}
+
+.skipButton {
+    display: block;
+    background: none;
+    border: none;
+    color: #a9d8e6;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 12px;
+}

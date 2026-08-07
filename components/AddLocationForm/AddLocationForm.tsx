@@ -137,6 +137,7 @@ export default function AddLocationForm() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

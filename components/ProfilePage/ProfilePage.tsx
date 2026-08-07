@@ -14,11 +14,14 @@ import {
 } from "@/services/friends";
 import { getUserLocations } from "@/services/locations";
 import styles from "./ProfilePage.module.css";
+import { resendVerification } from "@/services/auth";
+import VerifyEmailModal from "@/components/VerifyEmailModal/VerifyEmailModal";
 
 export default function ProfilePage() {
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [requestsOpen, setRequestsOpen] = useState(false);
+  const [verifyModalOpen, setVerifyModalOpen] = useState(false);
 
   const {
     data: user,
@@ -78,6 +81,15 @@ export default function ProfilePage() {
       queryClient.invalidateQueries({ queryKey: ["friends-stats"] });
     },
     onError: () => toast.error("Не вдалося відхилити запит"),
+  });
+
+  const resendMutation = useMutation({
+    mutationFn: () => resendVerification(user!.email),
+    onSuccess: () => {
+      toast.success("Код надіслано на пошту");
+      setVerifyModalOpen(true);
+    },
+    onError: () => toast.error("Не вдалося надіслати код"),
   });
 
   const handleAvatarClick = () => fileInputRef.current?.click();
@@ -160,6 +172,17 @@ export default function ProfilePage() {
         {user.bio && <p className={styles.bio}>{user.bio}</p>}
       </div>
 
+      {!user.isVerified && (
+        <button
+          type="button"
+          className={styles.verifyButton}
+          onClick={() => resendMutation.mutate()}
+          disabled={resendMutation.isPending}
+        >
+          {resendMutation.isPending ? "Надсилання..." : "Підтвердити пошту"}
+        </button>
+      )}
+
       {requestsOpen && (
         <div className={styles.requestsPanel}>
           {receivedRequests.length === 0 ? (
@@ -237,6 +260,13 @@ export default function ProfilePage() {
           </div>
         )}
       </div>
+
+      <VerifyEmailModal
+        email={user.email}
+        isOpen={verifyModalOpen}
+        onClose={() => setVerifyModalOpen(false)}
+        onVerified={() => setVerifyModalOpen(false)}
+      />
     </div>
   );
 }

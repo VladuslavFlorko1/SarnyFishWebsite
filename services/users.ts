@@ -7,6 +7,7 @@ export interface CurrentUser {
   avatar: string;
   bio: string;
   friends: string[];
+  isVerified: boolean;
 }
 
 export const getCurrentUser = async (): Promise<CurrentUser> => {

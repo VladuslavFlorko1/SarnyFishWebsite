@@ -113,22 +113,37 @@ export default function LocationsFeed() {
           {locations.map((location) => (
             <li key={location._id} className={css.card}>
               <div className={css.author}>
-                <Link
-                  href={`/profile/${location.owner._id}`}
-                  className={css.authorLink}
-                >
-                  <Image
-                    src={location.owner.avatar}
-                    alt={location.owner.username}
-                    width={44}
-                    height={44}
-                    className={css.avatar}
-                  />
+                {location.owner ? (
+                  <Link
+                    href={`/profile/${location.owner._id}`}
+                    className={css.authorLink}
+                  >
+                    <Image
+                      src={location.owner.avatar}
+                      alt={location.owner.username}
+                      width={44}
+                      height={44}
+                      className={css.avatar}
+                    />
 
-                  <div>
-                    <p className={css.name}>{location.owner.username}</p>
+                    <div>
+                      <p className={css.name}>{location.owner.username}</p>
+                    </div>
+                  </Link>
+                ) : (
+                  <div className={css.authorLink}>
+                    <Image
+                      src="https://res.cloudinary.com/dghwd7c3m/image/upload/v1782828518/62e9ba0691ba8f98b93e397fe14c47de_kldmk2.jpg"
+                      alt="Видалений користувач"
+                      width={44}
+                      height={44}
+                      className={css.avatar}
+                    />
+                    <div>
+                      <p className={css.name}>Видалений користувач</p>
+                    </div>
                   </div>
-                </Link>
+                )}
               </div>
 
               <div className={css.imageWrapper}>
