@@ -45,7 +45,9 @@ export const createLocation = async (payload: CreateLocationPayload) => {
   const formData = new FormData();
 
   formData.append("name", payload.name);
-  formData.append("description", payload.description);
+  if (payload.description.trim()) {
+    formData.append("description", payload.description);
+  }
   formData.append("city", payload.city);
   formData.append("type", payload.type);
   formData.append("lat", String(payload.lat));
