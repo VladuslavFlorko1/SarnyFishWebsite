@@ -1,0 +1,19 @@
+.mapWrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.map {
+    height: 240px;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(23, 179, 217, 0.3);
+}
+
+:global(.leaflet-container) {
+    overflow: hidden !important;
+    max-width: 100% !important;
+}

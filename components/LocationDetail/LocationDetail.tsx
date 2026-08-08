@@ -14,6 +14,7 @@ import {
 import { getCurrentUser } from "@/services/users";
 import { getComments, createComment, deleteComment } from "@/services/comments";
 import styles from "./LocationDetail.module.css";
+import LocationDetailMap from "@/components/LocationDetailMap/LocationDetailMapLoader";
 
 interface LocationDetailProps {
   locationId: string;
@@ -116,7 +117,7 @@ export default function LocationDetail({ locationId }: LocationDetailProps) {
     return <div className={styles.loading}>Завантаження...</div>;
   }
 
-  const isOwner = currentUser?._id === location.owner._id;
+  const isOwner = !!location.owner && currentUser?._id === location.owner._id;
 
   return (
     <div className={styles.page}>
@@ -154,19 +155,31 @@ export default function LocationDetail({ locationId }: LocationDetailProps) {
 
       <div className={styles.content}>
         <div className={styles.authorRow}>
-          <Link
-            href={`/profile/${location.owner._id}`}
-            className={styles.authorLink}
-          >
-            <Image
-              src={location.owner.avatar}
-              alt={location.owner.username}
-              width={40}
-              height={40}
-              className={styles.authorAvatar}
-            />
-            <span className={styles.authorName}>{location.owner.username}</span>
-          </Link>
+          {location.owner ? (
+            <Link
+              href={`/profile/${location.owner._id}`}
+              className={styles.authorLink}
+            >
+              <Image
+                src={location.owner.avatar}
+                alt={location.owner.username}
+                width={40}
+                height={40}
+                className={styles.authorAvatar}
+              />
+              <span className={styles.authorName}>
+                {location.owner.username}
+              </span>
+            </Link>
+          ) : (
+            <div className={styles.authorLink}>
+              <div
+                className={styles.authorAvatar}
+                style={{ background: "#5a7a85" }}
+              />
+              <span className={styles.authorName}>Видалений користувач</span>
+            </div>
+          )}
 
           {isOwner && (
             <div className={styles.ownerActions}>
@@ -225,6 +238,23 @@ export default function LocationDetail({ locationId }: LocationDetailProps) {
         </button>
       </div>
 
+      <div className={styles.fishRow}>
+  {location.fish.map((f) => (
+    <span key={f} className={styles.fishTag}>
+      {f}
+    </span>
+  ))}
+</div>
+
+<LocationDetailMap lat={location.coordinates.lat} lng={location.coordinates.lng} />
+
+<button
+  type="button"
+  className={`${styles.likeButton} ${location.isLiked ? styles.likeButtonActive : ""}`}
+  onClick={() => likeMutation.mutate()}
+  disabled={likeMutation.isPending}
+></button>
+
       <div className={styles.commentsSection}>
         <h2 className={styles.commentsTitle}>
           Коментарі ({location.commentsCount})
@@ -255,19 +285,19 @@ export default function LocationDetail({ locationId }: LocationDetailProps) {
             comments.map((comment) => (
               <div key={comment._id} className={styles.commentRow}>
                 <Image
-                  src={comment.author.avatar}
-                  alt={comment.author.username}
+                  src={comment.author?.avatar ?? "/icons/heart-white.svg"}
+                  alt={comment.author?.username ?? "Видалений користувач"}
                   width={32}
                   height={32}
                   className={styles.commentAvatar}
                 />
                 <div className={styles.commentBody}>
                   <p className={styles.commentAuthor}>
-                    {comment.author.username}
+                    {comment.author?.username ?? "Видалений користувач"}
                   </p>
                   <p className={styles.commentText}>{comment.text}</p>
                 </div>
-                {currentUser?._id === comment.author._id && (
+                {comment.author && currentUser?._id === comment.author._id && (
                   <button
                     type="button"
                     className={styles.commentDelete}
