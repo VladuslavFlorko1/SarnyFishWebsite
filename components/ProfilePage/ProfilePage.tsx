@@ -11,17 +11,21 @@ import {
   getReceivedRequests,
   acceptFriendRequest,
   rejectFriendRequest,
+  getFriendsList,
 } from "@/services/friends";
 import { getUserLocations } from "@/services/locations";
 import styles from "./ProfilePage.module.css";
 import { resendVerification } from "@/services/auth";
 import VerifyEmailModal from "@/components/VerifyEmailModal/VerifyEmailModal";
+import FriendSearchModal from "@/components/FriendSearchModal/FriendSearchModal";
 
 export default function ProfilePage() {
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [requestsOpen, setRequestsOpen] = useState(false);
   const [verifyModalOpen, setVerifyModalOpen] = useState(false);
+  const [friendsListOpen, setFriendsListOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   const {
     data: user,
@@ -41,6 +45,12 @@ export default function ProfilePage() {
     queryKey: ["friends-stats"],
     queryFn: getFriendsStats,
     enabled: !!user,
+  });
+
+  const { data: friendsList = [] } = useQuery({
+    queryKey: ["friends-list"],
+    queryFn: getFriendsList,
+    enabled: friendsListOpen && !!user,
   });
 
   const { data: receivedRequests = [] } = useQuery({
@@ -140,19 +150,25 @@ export default function ProfilePage() {
         />
 
         <div className={styles.statsRow}>
-          <div className={styles.statItem}>
+          <button
+            type="button"
+            className={styles.statItemButton}
+            onClick={() => setFriendsListOpen((prev) => !prev)}
+          >
             <span className={styles.statNumber}>
               {stats?.friendsCount ?? 0}
             </span>
             <span className={styles.statLabel}>друзів</span>
-          </div>
+          </button>
 
-          <div className={styles.statItem}>
-            <span className={styles.statNumber}>
-              {stats?.sentPendingCount ?? 0}
-            </span>
-            <span className={styles.statLabel}>надіслано</span>
-          </div>
+          <button
+            type="button"
+            className={styles.statItemButton}
+            onClick={() => setSearchModalOpen(true)}
+          >
+            <span className={styles.statNumber}>🔍</span>
+            <span className={styles.statLabel}>пошук</span>
+          </button>
 
           <button
             type="button"
@@ -181,6 +197,33 @@ export default function ProfilePage() {
         >
           {resendMutation.isPending ? "Надсилання..." : "Підтвердити пошту"}
         </button>
+      )}
+
+      {friendsListOpen && (
+        <div className={styles.requestsPanel}>
+          {friendsList.length === 0 ? (
+            <p className={styles.emptyText}>Поки що немає друзів</p>
+          ) : (
+            friendsList.map((friend) => (
+              <Link
+                key={friend._id}
+                href={`/profile/${friend._id}`}
+                className={styles.requestRow}
+              >
+                <div className={styles.requestUser}>
+                  <Image
+                    src={friend.avatar}
+                    alt={friend.username}
+                    width={36}
+                    height={36}
+                    className={styles.requestAvatar}
+                  />
+                  <span className={styles.requestName}>{friend.username}</span>
+                </div>
+              </Link>
+            ))
+          )}
+        </div>
       )}
 
       {requestsOpen && (
@@ -266,6 +309,11 @@ export default function ProfilePage() {
         isOpen={verifyModalOpen}
         onClose={() => setVerifyModalOpen(false)}
         onVerified={() => setVerifyModalOpen(false)}
+      />
+
+      <FriendSearchModal
+        isOpen={searchModalOpen}
+        onClose={() => setSearchModalOpen(false)}
       />
     </div>
   );

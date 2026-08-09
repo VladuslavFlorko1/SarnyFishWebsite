@@ -1,0 +1,139 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 26, 34, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 1100;
+    padding: 60px 16px 16px;
+}
+
+.modal {
+    width: 100%;
+    max-width: 400px;
+    max-height: 70vh;
+    background: rgba(10, 74, 95, 0.97);
+    border: 1px solid rgba(23, 179, 217, 0.3);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #e8f7de;
+    margin: 0;
+}
+
+.closeButton {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #e8f7de;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.searchInput {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(169, 216, 230, 0.25);
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: #e8f7de;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+}
+
+.searchInput:focus {
+    border-color: #17b3d9;
+}
+
+.searchInput::placeholder {
+    color: rgba(169, 216, 230, 0.4);
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.hint {
+    color: #a9d8e6;
+    font-size: 13px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.userRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.userLink {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+.userAvatar {
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.userName {
+    font-size: 14px;
+    color: #e8f7de;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.actionButton {
+    background: linear-gradient(135deg, #17b3d9, #0a4a5f);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.actionButtonSecondary {
+    background: rgba(255, 90, 90, 0.15);
+    border: 1px solid rgba(255, 90, 90, 0.3);
+    color: #ffb3b3;
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.friendsLabel {
+    color: #17b3d9;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+}

@@ -42,3 +42,15 @@ export const getUserById = async (id: string): Promise<UserProfileResponse> => {
   const { data } = await api.get(`/users/${id}`);
   return data;
 };
+export interface SearchedUser {
+  _id: string;
+  username: string;
+  avatar: string;
+  relationStatus: RelationStatus;
+  requestId: string | null;
+}
+
+export const searchUsers = async (query: string): Promise<SearchedUser[]> => {
+  const { data } = await api.get("/users/search", { params: { q: query } });
+  return data.users;
+};
