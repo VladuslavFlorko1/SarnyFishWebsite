@@ -1,8 +1,11 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { getFriendsStats } from "@/services/friends";
+import { getCurrentUser } from "@/services/users";
 import css from "./Footer.module.css";
 
 const NAV_ITEMS = [
@@ -15,6 +18,19 @@ const NAV_ITEMS = [
 
 const Footer = () => {
   const pathname = usePathname();
+
+  const { data: currentUser } = useQuery({
+    queryKey: ["current-user"],
+    queryFn: getCurrentUser,
+    retry: false,
+  });
+
+  const { data: stats } = useQuery({
+    queryKey: ["friends-stats"],
+    queryFn: getFriendsStats,
+    enabled: !!currentUser,
+    refetchInterval: 60000,
+  });
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -29,6 +45,7 @@ const Footer = () => {
   };
 
   const activeIndex = NAV_ITEMS.findIndex((item) => isActive(item.href));
+  const pendingRequests = stats?.receivedPendingCount ?? 0;
 
   return (
     <footer className={css.footer}>
@@ -46,6 +63,8 @@ const Footer = () => {
 
           {NAV_ITEMS.map((item) => {
             const active = isActive(item.href);
+            const isProfile = item.href === "/profile";
+
             return (
               <li key={item.href} className={css.navItem}>
                 <Link
@@ -59,6 +78,11 @@ const Footer = () => {
                     width={22}
                     height={22}
                   />
+                  {isProfile && pendingRequests > 0 && (
+                    <span className={css.badge}>
+                      {pendingRequests > 9 ? "9+" : pendingRequests}
+                    </span>
+                  )}
                 </Link>
               </li>
             );
