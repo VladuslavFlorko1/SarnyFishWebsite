@@ -18,6 +18,7 @@ import styles from "./ProfilePage.module.css";
 import { resendVerification } from "@/services/auth";
 import VerifyEmailModal from "@/components/VerifyEmailModal/VerifyEmailModal";
 import FriendSearchModal from "@/components/FriendSearchModal/FriendSearchModal";
+import { getUnreadCount } from "@/services/notifications";
 
 export default function ProfilePage() {
   const queryClient = useQueryClient();
@@ -82,6 +83,12 @@ export default function ProfilePage() {
       queryClient.invalidateQueries({ queryKey: ["friends-stats"] });
     },
     onError: () => toast.error("Не вдалося прийняти запит"),
+  });
+
+  const { data: unreadCount = 0 } = useQuery({
+    queryKey: ["notifications-unread-count"],
+    queryFn: getUnreadCount,
+    enabled: !!user,
   });
 
   const rejectMutation = useMutation({
@@ -180,6 +187,21 @@ export default function ProfilePage() {
             </span>
             <span className={styles.statLabel}>запити ▾</span>
           </button>
+
+          <Link href="/notifications" className={styles.statItemButton}>
+            <span
+              className={styles.statNumber}
+              style={{ position: "relative" }}
+            >
+              🔔
+              {unreadCount > 0 && (
+                <span className={styles.notifBadge}>
+                  {unreadCount > 9 ? "9+" : unreadCount}
+                </span>
+              )}
+            </span>
+            <span className={styles.statLabel}>сповіщення</span>
+          </Link>
         </div>
       </div>
 

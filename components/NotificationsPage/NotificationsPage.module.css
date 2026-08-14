@@ -1,0 +1,90 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px 16px 60px;
+    background: #0f2e3d;
+    min-height: 100vh;
+}
+
+.loading {
+    color: #a9d8e6;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e8f7de;
+    margin: 0 0 8px;
+}
+
+.emptyText {
+    color: #a9d8e6;
+    font-size: 14px;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 8px;
+    border-radius: 12px;
+    transition: background 0.15s ease;
+}
+
+.row:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.rowUnread {
+    background: rgba(23, 179, 217, 0.08);
+}
+
+.senderAvatar {
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+.text {
+    font-size: 13px;
+    color: #e8f7de;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.username {
+    font-weight: 700;
+}
+
+.time {
+    color: #7fa8b3;
+    font-size: 12px;
+}
+
+.thumbWrapper {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.thumb {
+    object-fit: cover;
+}

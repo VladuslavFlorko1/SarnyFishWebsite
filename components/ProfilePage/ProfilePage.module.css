@@ -279,3 +279,18 @@
     opacity: 0.6;
     cursor: not-allowed;
 }
+.notifBadge {
+    position: absolute;
+    top: -4px;
+    right: -10px;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 3px;
+    border-radius: 999px;
+    background: #ff5a5a;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 15px;
+    text-align: center;
+}

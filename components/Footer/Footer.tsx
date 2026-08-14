@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { getFriendsStats } from "@/services/friends";
+import { getUnreadCount } from "@/services/notifications";
 import { getCurrentUser } from "@/services/users";
 import css from "./Footer.module.css";
 
@@ -25,9 +25,9 @@ const Footer = () => {
     retry: false,
   });
 
-  const { data: stats } = useQuery({
-    queryKey: ["friends-stats"],
-    queryFn: getFriendsStats,
+  const { data: unreadCount = 0 } = useQuery({
+    queryKey: ["notifications-unread-count"],
+    queryFn: getUnreadCount,
     enabled: !!currentUser,
     refetchInterval: 60000,
   });
@@ -45,7 +45,6 @@ const Footer = () => {
   };
 
   const activeIndex = NAV_ITEMS.findIndex((item) => isActive(item.href));
-  const pendingRequests = stats?.receivedPendingCount ?? 0;
 
   return (
     <footer className={css.footer}>
@@ -78,9 +77,9 @@ const Footer = () => {
                     width={22}
                     height={22}
                   />
-                  {isProfile && pendingRequests > 0 && (
+                  {isProfile && unreadCount > 0 && (
                     <span className={css.badge}>
-                      {pendingRequests > 9 ? "9+" : pendingRequests}
+                      {unreadCount > 9 ? "9+" : unreadCount}
                     </span>
                   )}
                 </Link>
