@@ -1,0 +1,86 @@
+.card {
+    position: relative;
+    background: linear-gradient(180deg, #201d26 30%, #bfaedb 80%);
+    border: none;
+    border-radius: 0;
+    padding: 40px 16px 50px;
+    margin: 0;
+    min-height: 220px;
+    width: 100%;
+}
+
+.loading {
+    height: 200px;
+}
+
+.cornerStat {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cornerLabel {
+    font-size: 11px;
+    color: #e8f7de;
+}
+
+.cornerValue {
+    font-size: 13px;
+    font-weight: 700;
+    color: #e8f7de;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.periodsCol {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: center;
+    min-width: 0;
+}
+
+.periodsLabel {
+    font-size: 11px;
+    color: #a9d8e6;
+    margin: 0 0 4px;
+}
+
+.periodsValue {
+    font-size: 12px;
+    font-weight: 600;
+    color: #e8f7de;
+    margin: 0;
+}
+
+.ringWrapper {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scoreNumber {
+    position: absolute;
+    font-size: 40px;
+    font-weight: 800;
+    color: #e8f7de;
+}
+
+.activityLabel {
+    text-align: center;
+    font-size: 13px;
+    color: #a8e063;
+    font-weight: 600;
+    margin: 14px 0 0;
+}
