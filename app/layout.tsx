@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
@@ -34,9 +34,16 @@ export const metadata: Metadata = {
     "рибалка Україна",
   ],
   authors: [{ name: "SarnyFish" }],
+  manifest: "/manifest.json",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
+    apple: "/apple-touch-icon.png",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "SarnyFish",
   },
   openGraph: {
     title: "SarnyFish — риболовні локації Сарненського району",
@@ -66,6 +73,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a4a5f",
 };
 
 export default function RootLayout({

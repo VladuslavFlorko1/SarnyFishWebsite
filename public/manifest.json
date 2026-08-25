@@ -1,0 +1,30 @@
+{
+  "name": "SarnyFish — риболовні локації",
+  "short_name": "SarnyFish",
+  "description": "Знаходь найкращі місця для риболовлі, ділись уловами та спілкуйся з рибалками-однодумцями",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f2e3d",
+  "theme_color": "#0a4a5f",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
