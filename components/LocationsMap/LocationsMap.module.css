@@ -68,11 +68,11 @@
     margin-top: 4px;
 }
 
-:global(.leaflet-container) {
+.mapWrapper :global(.leaflet-container) {
     overflow: hidden !important;
     max-width: 100% !important;
 }
 
-:global(.leaflet-popup-content-wrapper) {
+.mapWrapper :global(.leaflet-popup-content-wrapper) {
     border-radius: 12px;
 }

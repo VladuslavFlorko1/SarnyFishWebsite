@@ -18,6 +18,7 @@
   color: #a9d8e6;
   text-align: center;
 }
-:global(.leaflet-container) {
-  overflow: hidden 
+.mapWrapper :global(.leaflet-container) {
+  overflow: hidden !important;
+  max-width: 100% !important;
 }
